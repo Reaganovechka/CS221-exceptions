@@ -1,0 +1,19 @@
+Goal: reads contents of file and outputs if it is formated as expected
+
+What do I need?
+    scanner to read teh files
+    logic to check each line to make sure its accurate
+    A way to output valid or invalid
+    Exceptions to handle said program
+        What needs to be handled?
+        if the file does not open/exist
+        fewer rows or columns than specified
+        more rows or colums than specified
+    *display why exception was thrown
+
+    variables? scanner to read file and lines, status (boolean), 
+
+    order: open file, read file, display valid or invalid
+
+
+    
