@@ -17,11 +17,10 @@ public class FormatChecker {
             } catch (FileNotFoundException e) {
                 System.out.println("java.io.FileNotFoundException: noSuchFile (The system cannot find the file specified)");
                 fileStatus = false;
-                System.out.print(fileStatus.toString());
             }
 
             if (fileStatus == true) {
-                
+
             }
 
             
