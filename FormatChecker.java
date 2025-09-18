@@ -47,6 +47,9 @@ public class FormatChecker extends Exception {
                     for (int col = 0; col < grid[row].length; col++) {                    
                         grid[row][col] = lineScnr.nextDouble();
                     }
+                    if (lineScnr.hasNext()) {
+                        throw new Exception ("Too many numbers in row " + (row + 1));
+                    }
                 }
                 
                 //Check next line after reading expected rows
