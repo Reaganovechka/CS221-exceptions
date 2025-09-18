@@ -17,3 +17,6 @@ What do I need?
 
 
     catch (Exception e)
+
+    Custom errors 
+    - not enouh rows/ cols
