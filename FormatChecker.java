@@ -9,6 +9,7 @@ public class FormatChecker {
         Boolean fileStatus = true;
         int expectedRow;
         int expectedCol;
+        double[][] grid;
         
 
         //Read in file
@@ -18,29 +19,43 @@ public class FormatChecker {
             Scanner lineScnr = null;
             //read file
             try {
+                //read file
                 fileScnr = new Scanner(new File(fileName));
-            } catch (FileNotFoundException e) {
-                System.out.println("java.io.FileNotFoundException: noSuchFile (The system cannot find the file specified)");
-                fileStatus = false;
-            }
+                //catch exception below
 
-            //If the file is valid, start checking the format
-            if (fileStatus) {
+                //Get rows/ cols
                 String rowsAndCols = fileScnr.nextLine().trim(); 
                 lineScnr = new Scanner(rowsAndCols);
-                try {
-                    expectedRow = lineScnr.nextInt();
-                    expectedCol = lineScnr.nextInt();
-                    System.out.print(expectedRow);
-                    System.out.print(expectedCol);
-                }
-                catch (InputMismatchException e) {
-                    System.out.println(e.toString() + ": Row/Col not integer");
-                    fileStatus = false;
-                }
-            }
+                expectedRow = lineScnr.nextInt();
+                expectedCol = lineScnr.nextInt();
+                //Catch exception below
 
-            
+                //read in the data
+                grid = new double[expectedRow][expectedCol];
+                for (int row = 0; row < grid.length; row++) {
+                    String line = fileScnr.nextLine().trim();
+                    lineScnr = new Scanner(line);
+                    for (int col = 0; col < grid[row].length; col++) {
+                        grid[row][col] = lineScnr.nextDouble();
+                    }
+                }
+
+            } 
+            catch 
+            // catch (FileNotFoundException e) {
+            //     System.out.println("java.io.FileNotFoundException: " + fileName +  "(The system cannot find the file specified)");
+            //     fileStatus = false;
+            // }                
+            // catch (InputMismatchException e) {
+            //         System.out.println(e.toString() + ": Row/Col not integer");
+            //         fileStatus = false;
+            //         break; //file is invalid, do not read the rest of the file
+            // }
+            // catch (NumberFormatException e) {
+            //     System.out.println(e.toString());
+            // }
+
+            //TODO: print the result of the file
         }
     }
 }
