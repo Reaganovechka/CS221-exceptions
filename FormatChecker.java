@@ -3,10 +3,9 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-public class FormatChecker {
+public class FormatChecker extends Exception {
     public static void main(String[] args) {
         String fileName;
-        Boolean fileStatus = true;
         int expectedRow;
         int expectedCol;
         double[][] grid;
@@ -15,12 +14,14 @@ public class FormatChecker {
         //Read in file
         for (int i = 0; i < args.length; i++) {
             fileName = args[i];
+            Boolean fileStatus = true;
             Scanner fileScnr = null;
             Scanner lineScnr = null;
             //read file
             try {
                 //read file
                 fileScnr = new Scanner(new File(fileName));
+                System.out.println(fileName);
                 //catch exception below
 
                 //Get rows/ cols
@@ -28,40 +29,64 @@ public class FormatChecker {
                 lineScnr = new Scanner(rowsAndCols);
                 expectedRow = lineScnr.nextInt();
                 expectedCol = lineScnr.nextInt();
+                if (lineScnr.hasNext()){
+                    throw new Exception ("too many row/col args");
+                }
                 //Catch exception below
 
                 //read in the data
+                
                 grid = new double[expectedRow][expectedCol];
             
-                for (int row = 0; row < grid.length; row++) { //Change the grid.length to expected row to get rid of that trailing line?? Should always have the proper amout??
+                for (int row = 0; row < grid.length; row++) { 
                     String line = fileScnr.nextLine().trim();
                     lineScnr = new Scanner(line);
-                    for (int col = 0; col < grid[row].length; col++) {
-                        if (grid[row].length == 0) {
-                            break;
-                        }                        
+                    if (line.isEmpty()) {
+                        throw new Exception("Not enough rows!");
+                    }
+                    for (int col = 0; col < grid[row].length; col++) {                    
                         grid[row][col] = lineScnr.nextDouble();
                     }
                 }
-
-            } 
-            catch (Exception e) {
-                if (e == error)
+                
+                //Check next line after reading expected rows
+                if (fileScnr.hasNextLine()){
+                    String extraLine = fileScnr.nextLine().trim();
+                    if (!extraLine.isEmpty()) {
+                        throw new Exception("Too many rows!");
+                    }
+                }
             }
-            // catch (FileNotFoundException e) {
-            //     System.out.println("java.io.FileNotFoundException: " + fileName +  "(The system cannot find the file specified)");
-            //     fileStatus = false;
-            // }                
-            // catch (InputMismatchException e) {
-            //         System.out.println(e.toString() + ": Row/Col not integer");
-            //         fileStatus = false;
-            //         break; //file is invalid, do not read the rest of the file
-            // }
-            // catch (NumberFormatException e) {
-            //     System.out.println(e.toString());
-            // }
 
-            //TODO: print the result of the file
+            catch (FileNotFoundException e) {
+                System.out.println("java.io.FileNotFoundException: " + fileName +  "(The system cannot find the file specified)");
+                fileStatus = false;
+            }                
+            catch (InputMismatchException e) {
+                    System.out.println(e.toString() + ": Row/Col not integer");
+                    fileStatus = false;
+            }
+            catch (NumberFormatException e) {
+                System.out.println(e.toString());
+            }
+            catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println(e.toString());
+                fileStatus = false;
+            }
+            catch (Exception e) {
+                System.out.println("A format error occured: " + e.getMessage());
+                fileStatus = false;
+            }
+
+            //Print result of file
+            if (!fileStatus){
+                System.out.println("INVALID");
+                System.out.println();
+            }                
+            else if (fileStatus) {
+                   System.out.println("VALID");
+                System.out.println();
+            }
         }
     }
 }

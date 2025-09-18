@@ -20,3 +20,13 @@ What do I need?
 
     Custom errors 
     - not enouh rows/ cols
+
+    read in file
+    FILE NOT FOUND
+    read first line
+    IF TOO MANY NUMS, IF NOT ENOUGH NUMS
+    IF TOO MANY ROWS, IF TOO MANY COLS
+    IF NOT ENOUGH ROWS, IF NOT ENOUGH COLS
+    read each value
+    IF VALUE IS NOT A DOUBLE OR INT
+    
