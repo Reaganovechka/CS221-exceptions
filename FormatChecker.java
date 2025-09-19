@@ -3,24 +3,44 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 /**
- * FormatChecker verifies the format of each file given in the run command. If the file is valid, displays the file name 
- * and 'VALID.' If the file is invalid, throws an exception and displays what is wrong with the formatting of the file. 
+ * FormatChecker verifies the format of each file provided as a command line
+ * argument.
+ * For each file, it checks that:
+ * The first line contains exactly 2 integers: number of rows and columns
+ * The file contains the specified number of rows and columns, confirming each
+ * value is either a double or an integer.
+ * The file has no extra rows or columns
+ * 
+ * If the file is valid, prints the file name followed by 'VALID.'
+ * If the file is invalid, prints the file name, details about the formatting
+ * error, and 'INVALID.'
+ * (This javadoc describes class FormatChecker)
  * 
  * @author Reagan Ovechka
  */
 public class FormatChecker {
+
+    /**
+     * Main method to process whether each file is formatted correctly, then prints results to standard output.
+     * (this javadoc describes method main())
+     * 
+     * @param args List of all file names to be checked
+     * @throws FileNotFoundException if a file cannot be found
+     * @throws NumberFormatException if a number cannot be parsed
+     * @throws Exception             for any other format issues
+     */
     public static void main(String[] args) {
         String fileName; // Holds name of current file
         int expectedRow; // Expected number of rows in the file
         int expectedCol; // Expected number of columns in the file
-        double[][] grid;
+        double[][] grid; // Holds the data read from the file
 
         // Try to read each file and check format, catching exceptions as needed
         for (int i = 0; i < args.length; i++) {
             fileName = args[i]; // get file name from command line
             Boolean fileStatus = true; // Keeps track if file is valid or not
-            Scanner fileScnr = null;
-            Scanner lineScnr = null;
+            Scanner fileScnr = null; // Scanner to read the file
+            Scanner lineScnr = null; // Scanner to read each line
 
             try {
                 // read file
@@ -75,6 +95,7 @@ public class FormatChecker {
                 System.out.println("File formatted incorrectly: " + e.getMessage());
                 fileStatus = false;
             } finally {
+                // Close scanners
                 fileScnr.close();
                 lineScnr.close();
             }
