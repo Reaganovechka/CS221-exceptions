@@ -34,3 +34,6 @@ What do I need?
     Get the next() instead of nextInt() or nextDouble() and then parse it to a int/double. 
     - this also allows to display what value is not an number
     - I feel like htis add unnecessary code????
+    it does.
+
+    not enough columns

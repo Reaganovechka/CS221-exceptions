@@ -45,7 +45,10 @@ public class FormatChecker extends Exception {
                     if (line.isEmpty()) {
                         throw new Exception("Not enough rows!");
                     }
-                    for (int col = 0; col < grid[row].length; col++) {                    
+                    for (int col = 0; col < grid[row].length; col++) {    
+                        if (!lineScnr.hasNext()) {
+                            throw new Exception("Not enough columns!");
+                        }                
                         grid[row][col] = Double.parseDouble(lineScnr.next());
                     }
                     if (lineScnr.hasNext()) {
@@ -75,7 +78,7 @@ public class FormatChecker extends Exception {
                 fileStatus = false;
             }
             catch (Exception e) {
-                System.out.println("A format error occured: " + e.getMessage());
+                System.out.println("File formatted incorrectly: " + e.getMessage());
                 fileStatus = false;
             }
 
